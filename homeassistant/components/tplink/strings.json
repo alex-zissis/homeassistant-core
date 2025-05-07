@@ -469,6 +469,24 @@
           "description": "Random seed."
         }
       }
+    },
+    "get_maps": {
+      "name": "Get maps",
+      "description": "Get the map list from the device."
+    },
+    "get_rooms": {
+      "name": "Get rooms",
+      "description": "Get the room list from the device.",
+      "fields": {
+        "map_id": {
+          "name": "Map ID",
+          "description": "The map ID to get the room list from."
+        }
+      }
+    },
+    "get_vacuum_current_position": {
+      "name": "Get vacuum current position",
+      "description": "Get the current position of the vacuum."
     }
   },
   "exceptions": {

@@ -169,3 +169,24 @@ random_effect:
           min: 1
           step: 1
           max: 600
+get_maps:
+  target:
+    entity:
+      integration: tplink
+      domain: vacuum
+get_rooms:
+  target:
+    entity:
+      integration: tplink
+      domain: vacuum
+  fields:
+    map_id:
+      example: 1
+      required: false
+      selector:
+        number:
+get_vacuum_current_position:
+  target:
+    entity:
+      integration: tplink
+      domain: vacuum
