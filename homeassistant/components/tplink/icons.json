@@ -216,6 +216,11 @@
     },
     "get_vacuum_current_position": {
       "service": "mdi:crosshairs-gps"
-    }
+    },
+    "clean_rooms": {
+      "service": "mdi:robot-vacuum"
+    },
+    "get_current_room": { "service": "mdi:map-marker" },
+    "custom_query": { "service": "mdi:code-json" }
   }
 }
