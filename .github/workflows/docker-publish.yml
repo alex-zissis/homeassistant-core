@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
     inputs:
       BASE_VERSION:
-        description: "Base image version (e.g. 2025.03.0)"
+        description: "Base image version (e.g. 2025.02.1)"
         required: true
-        default: "2025.03.0"
+        default: "2025.02.1"
 
 env:
   REGISTRY: ghcr.io
@@ -42,7 +42,7 @@ jobs:
         run: |
           docker build \
             --build-arg=BUILD_ARCH=arm64 \
-            --build-arg=BUILD_FROM=ghcr.io/home-assistant/aarch64-builder:${{ github.event.inputs.BASE_VERSION || '2025.03.0' }} \
+            --build-arg=BUILD_FROM=ghcr.io/home-assistant/aarch64-homeassistant-base:${{ github.event.inputs.BASE_VERSION || '2025.02.1' }} \
             -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.prep.outputs.sha_tag }} \
             -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
             -f ./Dockerfile .
