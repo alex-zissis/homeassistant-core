@@ -2,7 +2,13 @@
 #
 # To update, run python3 -m script.hassfest -p docker
 ARG BUILD_FROM
-FROM ${BUILD_FROM}
+
+# --- Builder stage: build lz4 wheel ---
+FROM python:3.13-alpine AS lz4-builder
+RUN apk add --no-cache build-base
+RUN pip wheel --wheel-dir=/wheels lz4==4.4.4
+
+FROM ${BUILD_FROM:-ghcr.io/home-assistant/aarch64-homeassistant-base:2025.02.1}
 
 # Synchronize with homeassistant/core.py:async_stop
 ENV \
@@ -29,6 +35,12 @@ RUN \
     && chmod +x /bin/go2rtc \
     # Verify go2rtc can be executed
     && go2rtc --version
+
+# Copy lz4 wheel from builder
+COPY --from=lz4-builder /wheels/lz4-4.4.4-*.whl /tmp/
+
+# Install lz4 wheel before requirements
+RUN pip3 install /tmp/lz4-4.4.4-*.whl
 
 # Install uv
 RUN pip3 install uv==0.7.1
